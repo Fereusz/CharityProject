@@ -13,7 +13,11 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 
 //    Long countAllByInstitutionId();
 
+//    @Query(value = "select count (institution_id) from donations",nativeQuery = true)
+//    Long numberOfInstitutions();
+
     @Query(value = "select count (institution_id) from Donation ")
     Long sumOfDonatedInstitutions();
+
 
 }
