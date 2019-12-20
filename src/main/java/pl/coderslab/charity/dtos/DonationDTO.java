@@ -24,11 +24,11 @@ public class DonationDTO {
     private String zipCode;
     @NotBlank @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
-    @NotBlank
+    @NotBlank @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
     @Size(max = 200)
     private String pickUpComment;
     private List<Category> categories;
-    private Institution institutions;
+    private Institution institution;
 
 }
