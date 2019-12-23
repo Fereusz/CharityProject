@@ -21,7 +21,6 @@ public class Category {
     private Long id;
     @Column(unique = true, nullable = false)
     private String name;
-    @ManyToOne
-    private Donation donation;
+
 
 }

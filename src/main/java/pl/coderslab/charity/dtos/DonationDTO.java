@@ -28,7 +28,7 @@ public class DonationDTO {
     private LocalTime pickUpTime;
     @Size(max = 200)
     private String pickUpComment;
-    private List<Category> categories;
-    private Institution institution;
+    private List<Category> categories; // tutaj zrobic liste <CategoryDTO>
+    private Institution institution; // tutaj zrobic obiekt insitutionDTO
 
 }
