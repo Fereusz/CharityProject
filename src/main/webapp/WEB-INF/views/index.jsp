@@ -15,6 +15,15 @@
 <body>
 <jsp:include page="header.jsp"/>
 
+<div class="slogan container container--90">
+    <div class="slogan--item">
+        <h1>
+            Zacznij pomagać!<br/>
+            Oddaj niechciane rzeczy w zaufane ręce
+        </h1>
+    </div>
+</div>
+
 <section class="stats">
     <div class="container container--85">
         <div class="stats--item">
