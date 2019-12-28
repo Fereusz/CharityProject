@@ -24,6 +24,15 @@ public class DefaultDonationService implements DonationService {
         Donation newDonation = mapper.map(donationDTO, Donation.class);
         donationRepository.save(newDonation);
 
+    }
 
+    @Override
+    public Long sumOfDonatedInstitutions() {
+        return donationRepository.sumOfInstitutionsDonated();
+    }
+
+    @Override
+    public Long sumOfBags() {
+        return donationRepository.sumOfGivenBags();
     }
 }

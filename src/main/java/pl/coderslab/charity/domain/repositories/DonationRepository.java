@@ -9,7 +9,7 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
    // Long countByQuantityExists();
 
     @Query(value = "select sum (quantity)from Donation ")
-    Long sumOfBags ();
+    Long sumOfGivenBags ();
 
 //    Long countAllByInstitutionId();
 
@@ -17,7 +17,7 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
 //    Long numberOfInstitutions();
 
     @Query(value = "select count (distinct institution) from Donation ")
-    Long sumOfDonatedInstitutions();
+    Long sumOfInstitutionsDonated();
 
 
 
