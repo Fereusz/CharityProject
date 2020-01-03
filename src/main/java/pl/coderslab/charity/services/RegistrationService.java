@@ -6,4 +6,5 @@ import pl.coderslab.charity.dtos.RegistrationDTO;
 public interface RegistrationService  {
 
     void register (RegistrationDTO registrationDTO);
+    void adminRegister(RegistrationDTO registrationDTO);
 }
