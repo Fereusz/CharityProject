@@ -11,7 +11,6 @@ import java.util.List;
 public class InstitutionDTO {
 
     private Long id;
-    private List<Donation> donations;
     @NotBlank
     private String name;
     @NotBlank

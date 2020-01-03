@@ -30,9 +30,4 @@ public class HomeController {
         return "index";
     }
 
-//    @RequestMapping("/")
-//    public String showInformationsOnIndexPage (Model model) {
-//
-//        return "index";
-//    }
 }

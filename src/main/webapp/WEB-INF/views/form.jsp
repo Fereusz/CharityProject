@@ -52,7 +52,7 @@
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:checkbox value="${category}" path="categories" />
+                            <form:checkbox value="${category.id}" path="categories" />
 
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
@@ -89,7 +89,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" name="organization" value="${institution}"/>
+                            <form:radiobutton path="institution" name="organization" value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
@@ -210,7 +210,9 @@
                     <button type="button" class="btn prev-step">Wstecz</button>
                     <button type="submit" class="btn">Potwierdzam</button>
                 </div>
+
             </div>
+            <form:errors path="*"/>
         </form:form>
     </div>
 </section>
