@@ -20,6 +20,10 @@
 <body>
 
 <jsp:include page="../header.jsp"/></br></br>
+
+<a href="/admin/create" class="btn btn--without-border">
+    Dodaj administratora</a></br></br>
+
 <div class="container--90">
     <table id="tabAdmin" >
         <tr class="form-group form-group--inline">

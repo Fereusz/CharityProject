@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group form-group--buttons">
-        <a href="/login" class="btn btn--without-border">Zaloguj</a>
+ <%--       <a href="/login" class="btn btn--without-border">Zaloguj</a>--%>
         <button class="btn" type="submit">Zalóż konto</button>
     </div>
         <form:errors path="*"/>
