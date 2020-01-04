@@ -1506,7 +1506,7 @@ header nav ul li:last-of-type {
 
 /* line 1, scss/modules/_footer.scss */
 footer {
-  min-height: 80vh;
+  min-height: 30vh;
   background-image: url(../images/footer-bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
