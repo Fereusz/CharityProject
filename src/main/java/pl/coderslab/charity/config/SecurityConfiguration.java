@@ -15,9 +15,11 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
+    private final MySecurityHandler mySecurityHandler;
 
-    public SecurityConfiguration(DataSource dataSource) {
+    public SecurityConfiguration(DataSource dataSource, MySecurityHandler mySecurityHandler) {
         this.dataSource = dataSource;
+        this.mySecurityHandler = mySecurityHandler;
     }
 
     @Bean
@@ -49,7 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")//to nie jest wymagane w naszym przypadku - u nas parametry nazywaja sie tak samo
                 .passwordParameter("password")
-                .defaultSuccessUrl("/")
+                .successHandler(mySecurityHandler)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
