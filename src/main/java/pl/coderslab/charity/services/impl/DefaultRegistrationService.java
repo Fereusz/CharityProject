@@ -11,13 +11,16 @@ import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.services.RegistrationService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Transactional
 @Service
 public class DefaultRegistrationService implements RegistrationService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private  final RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public DefaultRegistrationService(PasswordEncoder passwordEncoder, UserRepository userRepository, RoleRepository roleRepository) {
         this.passwordEncoder = passwordEncoder;
@@ -51,4 +54,13 @@ public class DefaultRegistrationService implements RegistrationService {
         userRepository.save(user);
 
     }
+
+    @Override
+    public List<RegistrationDTO> findAllAdmins() {
+        ModelMapper adminMapper = new ModelMapper();
+        return userRepository.findAllAdmins().stream()
+                .map(a -> adminMapper.map(a, RegistrationDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }

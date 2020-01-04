@@ -47,6 +47,12 @@ public class AdminController {
 
     }
 
+    @GetMapping("/admins")
+    public String allAdminsPage (Model model) {
+        model.addAttribute("allAdmins",registrationService.findAllAdmins());
+        return "admin/admin-all";
+    }
+
     @GetMapping("/create")
     public String prepareAdminAccount(Model model) {
         model.addAttribute("registerAdmin", new RegistrationDTO());
