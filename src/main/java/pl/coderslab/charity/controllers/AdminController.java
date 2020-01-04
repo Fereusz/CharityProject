@@ -27,7 +27,6 @@ public class AdminController {
     private final DonationService donationService;
 
 
-
     public AdminController(RegistrationService registrationService, UserRepository userRepository, InstitutionService institutionService, DonationService donationService) {
         this.registrationService = registrationService;
         this.userRepository = userRepository;
@@ -36,20 +35,20 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAdminPage (Principal principal, Model model) {
+    public String getAdminPage(Principal principal, Model model) {
         String name = principal.getName();
         User user = userRepository.findByUsername(name);
         model.addAttribute("admin", user);
-        model.addAttribute("institutions",institutionService.findAllInstitutions());
-        model.addAttribute("numberOfBags",donationService.sumOfBags());
+        model.addAttribute("institutions", institutionService.findAllInstitutions());
+        model.addAttribute("numberOfBags", donationService.sumOfBags());
         model.addAttribute("numberOfInstitutions", donationService.sumOfDonatedInstitutions());
         return "admin/admin-main";
 
     }
 
     @GetMapping("/admins")
-    public String allAdminsPage (Model model) {
-        model.addAttribute("allAdmins",registrationService.findAllAdmins());
+    public String allAdminsPage(Model model) {
+        model.addAttribute("allAdmins", registrationService.findAllAdmins());
         return "admin/admin-all";
     }
 
@@ -61,14 +60,51 @@ public class AdminController {
 
     @PostMapping("/create")
     public String processAdminAccount(@ModelAttribute("registerAdmin") @Valid RegistrationDTO registrationDTO,
-                                        BindingResult result){
-        if(result.hasErrors()){
+                                      BindingResult result) {
+        if (result.hasErrors()) {
             return "admin/admin-add";
         }
         registrationService.adminRegister(registrationDTO);
         return "redirect:/";
     }
+
+    @GetMapping("admins/delete")
+    public String processDeleteAdminAccount(RegistrationDTO registrationDTO, Long id) {
+        registrationService.deleteAdmin(registrationDTO, id);
+        return "redirect:/admin/admins";
+    }
+
+    @GetMapping("admins/update")
+    public String prepareUpdateAdminAccount(Model model, Long id) {
+        model.addAttribute("adminUpdate", registrationService.updateAdmin(id));
+        return "/admin/admin-update";
+    }
+
+    @PostMapping("admins/update")
+    public String processUpdateAdminAccount (@ModelAttribute("adminUpdate") @Valid RegistrationDTO registrationDTO,
+                                             BindingResult result) {
+        if(result.hasErrors()){
+            return "admins/update-admin";
+        }
+        registrationService.adminRegister(registrationDTO);
+        return "redirect:/admin/admins";
+    }
 }
 
 
 
+//    @GetMapping("/admins/update")
+//    public String prepareUpdateAdminAccount(Model model, Long id) {
+//        model.addAttribute("updateAdmin", registrationService.prepareUpdateForAdminDataAccount(id));
+//        return "admin/update-admin";
+//    }
+//
+//    @PostMapping("/admins/update")
+//    public String processUpdateAdminAccount(@ModelAttribute("updateAdmin") @Valid RegistrationDataDTO dataDTO,
+//                                            BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "admin/update-admin";
+//        }
+//        registrationService.registerAdmin(dataDTO);
+//        return "redirect:/admin/admins";
+//    }

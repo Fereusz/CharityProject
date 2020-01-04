@@ -12,6 +12,7 @@ import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.services.RegistrationService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -61,6 +62,22 @@ public class DefaultRegistrationService implements RegistrationService {
         return userRepository.findAllAdmins().stream()
                 .map(a -> adminMapper.map(a, RegistrationDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteAdmin(RegistrationDTO registrationDTO, Long id) {
+        User user = userRepository.findById(id).get();
+        if (user != null) {
+            userRepository.delete(user);
+        }
+
+    }
+
+    @Override
+    public RegistrationDTO updateAdmin(Long id) {
+        User adminToEdit = userRepository.findById(id).get();
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(adminToEdit, RegistrationDTO.class);
     }
 
 }
