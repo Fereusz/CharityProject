@@ -81,30 +81,23 @@ public class AdminController {
     }
 
     @PostMapping("admins/update")
-    public String processUpdateAdminAccount (@ModelAttribute("adminUpdate") @Valid RegistrationDTO registrationDTO,
-                                             BindingResult result) {
-        if(result.hasErrors()){
+    public String processUpdateAdminAccount(@ModelAttribute("adminUpdate") @Valid RegistrationDTO registrationDTO,
+                                            BindingResult result) {
+        if (result.hasErrors()) {
             return "admins/update-admin";
         }
         registrationService.adminRegister(registrationDTO);
         return "redirect:/admin/admins";
     }
+
+    // INSTITUTIONS //
+
+    @GetMapping("/institutions")
+    public String showAllInstitutions(Model model) {
+        model.addAttribute("allInstitutions", institutionService.findAllInstitutions());
+        return "/admin/institution-all";
+    }
+
 }
 
 
-
-//    @GetMapping("/admins/update")
-//    public String prepareUpdateAdminAccount(Model model, Long id) {
-//        model.addAttribute("updateAdmin", registrationService.prepareUpdateForAdminDataAccount(id));
-//        return "admin/update-admin";
-//    }
-//
-//    @PostMapping("/admins/update")
-//    public String processUpdateAdminAccount(@ModelAttribute("updateAdmin") @Valid RegistrationDataDTO dataDTO,
-//                                            BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "admin/update-admin";
-//        }
-//        registrationService.registerAdmin(dataDTO);
-//        return "redirect:/admin/admins";
-//    }
