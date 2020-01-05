@@ -90,7 +90,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" name="institution" value="${institution.id}"/>
+                            <form:radiobutton path="institution" name="institution" value="${institution.name}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
