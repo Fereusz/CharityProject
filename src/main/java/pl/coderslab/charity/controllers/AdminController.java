@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.domain.repositories.UserRepository;
+import pl.coderslab.charity.dtos.InstitutionDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
@@ -98,6 +99,47 @@ public class AdminController {
         return "/admin/institution-all";
     }
 
+    @GetMapping("/institutions/delete")
+    public String deleteInstitution(InstitutionDTO institutionDTO, Long id) {
+        institutionService.deleteInstitution(institutionDTO, id);
+        return "redirect: admin/institutions";
+
+    }
+
+    @GetMapping("/institution/add")
+    public String prepareAddNewInstitution(Model model) {
+        model.addAttribute("institutionAdd", new InstitutionDTO());
+        return "admin/institution-add";
+
+    }
+
+    @PostMapping("/institution/add")
+    public String processAddNewInstitution(@ModelAttribute("institutionAdd") @Valid InstitutionDTO institutionDTO,
+                                           BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/institution-add";
+        }
+        institutionService.saveInstitution(institutionDTO);
+        return "redirect:/admin/institutions";
+    }
+
+    @GetMapping("/institutions/update")
+    public String prepareUpdate(Model model, Long id) {
+        model.addAttribute("updateInstitution", institutionService.prepareUpdate(id));
+        return "admin/institution-update";
+
+    }
+
+    @PostMapping("/institutions/update")
+    public String processUpdateInst (@ModelAttribute ("updateInstitution") @Valid InstitutionDTO
+                                                    institutionDTO, BindingResult result) {
+        if (result.hasErrors()) {
+            return "admin/institution-update";
+        }
+        institutionService.saveInstitution(institutionDTO);
+        return "redirect:/admin/institutions";
+    }
 }
+
 
 

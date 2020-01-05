@@ -48,6 +48,9 @@
             </tr>
         </c:forEach>
     </table>
+
+    <a href="/admin/institution/add" class="btn btn--without-border">
+        Dodaj Instytucje</a></br></br>
 </div></br></br></br></br></br>
 
 <jsp:include page="../footer.jsp"/>
