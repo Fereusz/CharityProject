@@ -52,7 +52,8 @@
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:checkbox value="${category.id}" path="categories" />
+                            <input name="category" type="checkbox" value="${category.name}">
+<%--                            <form:checkbox value="${category.id}" path="categories" />--%>
 
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
@@ -72,7 +73,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input path="quantity" name="bags" step="1" min="1"/>
+                        <form:input path="quantity" name="bags" step="1" min="1" id="bags"/>
                     </label>
                 </div>
 
@@ -89,7 +90,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" name="organization" value="${institution.id}"/>
+                            <form:radiobutton path="institution" name="institution" value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
@@ -116,22 +117,22 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input  path="street" type="text"/> </label>
+                            <label> Ulica <form:input id="street" path="street" type="text"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Miasto <form:input path="city" type="text"/> </label>
+                            <label> Miasto <form:input id="city" path="city" type="text"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input path="zipCode" type="text"/>
+                                Kod pocztowy <form:input id="zipCode" path="zipCode" type="text"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="phone" name="phone"/>
+                                Numer telefonu <input type="phone" id="phone" name="phone"/>
                             </label>
                         </div>
                     </div>
@@ -139,17 +140,17 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <form:input path="pickUpDate" type="date"/> </label>
+                            <label> Data <form:input id="data" path="pickUpDate" type="date"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input path="pickUpTime" type="time"/> </label>
+                            <label> Godzina <form:input id="time" path="pickUpTime" type="time"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera
-                                <form:textarea path="pickUpComment" name="more_info" rows="5"></form:textarea>
+                                <form:textarea id="comment" path="pickUpComment" name="more_info" rows="5"></form:textarea>
                             </label>
                         </div>
                     </div>
@@ -170,15 +171,15 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
+                                <span class="summary--text" id="quantitySummary"
+                                ></span
                                 >
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                <span class="summary--text" id="institutionSummary"
+                                ></span
                                 >
                             </li>
                         </ul>
@@ -188,19 +189,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                                <li id="streetSummary"></li>
+                                <li id="citySummary"></li>
+                                <li id="zipCodeSummary"></li>
+                                <li id="phoneSummary"></li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                                <li id="dateSummary"></li>
+                                <li id="timeSummary"></li>
+                                <li id="commentSummary"></li>
                             </ul>
                         </div>
                     </div>
@@ -218,6 +219,7 @@
 </section>
 
 <jsp:include page="footer.jsp"/>
+
 
 
 </body>
