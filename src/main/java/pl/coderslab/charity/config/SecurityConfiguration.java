@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .usernameParameter("username")//to nie jest wymagane w naszym przypadku - u nas parametry nazywaja sie tak samo
                 .passwordParameter("password")
+                // changed after injection
                 .successHandler(mySecurityHandler)
                 .and()
                 .logout()

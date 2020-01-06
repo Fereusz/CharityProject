@@ -8,15 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.domain.entities.User;
-import pl.coderslab.charity.domain.repositories.DonationRepository;
-import pl.coderslab.charity.domain.repositories.InstitutionRepository;
 import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.InstitutionDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
 import pl.coderslab.charity.services.RegistrationService;
-
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -75,7 +72,7 @@ public class AdminController {
     }
 
     @GetMapping("admins/delete")
-    public String processDeleteAdminAccount(RegistrationDTO registrationDTO, Long id) {
+    public String deleteAdminAccount(RegistrationDTO registrationDTO, Long id) {
         registrationService.deleteAdmin(registrationDTO, id);
         return "redirect:/admin/admins";
     }
@@ -100,7 +97,7 @@ public class AdminController {
 
 
     @GetMapping("/institutions")
-    public String getAllInstitutionsPage(Model model) {
+    public String showAllInstitutions(Model model) {
         model.addAttribute("allInstitutions", institutionService.findAllInstitutions());
         return "admin/institution-all";
     }
@@ -131,14 +128,14 @@ public class AdminController {
     }
 
     @GetMapping("/institutions/update")
-    public String prepareUpdate(Model model, Long id) {
+    public String prepareUpdateInstitution(Model model, Long id) {
         model.addAttribute("updateInstitution", institutionService.prepareUpdate(id));
         return "admin/institution-update";
 
     }
 
     @PostMapping("/institutions/update")
-    public String processUpdateInst (@ModelAttribute ("updateInstitution") @Valid InstitutionDTO
+    public String processUpdateInstitution (@ModelAttribute ("updateInstitution") @Valid InstitutionDTO
                                                     institutionDTO, BindingResult result) {
         if (result.hasErrors()) {
             return "admin/institution-update";
