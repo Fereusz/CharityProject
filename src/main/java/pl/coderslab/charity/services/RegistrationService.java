@@ -12,4 +12,9 @@ public interface RegistrationService  {
     List<RegistrationDTO> findAllAdmins();
     void deleteAdmin (RegistrationDTO registrationDTO, Long id);
     RegistrationDTO updateAdmin (Long id);
+
+            // users//
+
+    List<RegistrationDTO> findAllUsers();
+    void deleteUser (RegistrationDTO registrationDTO,Long id);
 }

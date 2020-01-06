@@ -143,6 +143,20 @@ public class AdminController {
         institutionService.addInstitution(institutionDTO);
         return "redirect:/admin/institutions";
     }
+
+                //USER MANAGEMENT//
+
+    @GetMapping("/users")
+    public String showAllUsers(Model model) {
+        model.addAttribute("allUsers", registrationService.findAllUsers());
+        return "users/users-all";
+    }
+
+    @GetMapping("/users/delete")
+    public String deleteUser (RegistrationDTO registrationDTO, Long id) {
+        registrationService.deleteUser(registrationDTO,id);
+        return "redirect:/admin/users";
+    }
 }
 
 

@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: marcin
-  Date: 05.01.2020
-  Time: 14:08
+  Date: 06.01.2020
+  Time: 13:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page isELIgnored="false" %>
@@ -21,26 +21,25 @@
 
 <jsp:include page="../header.jsp"/></br></br>
 
-
 <div class="container--90">
-    <table id="tabInstitution" >
+    <table id="tabUser" >
         <tr class="form-group form-group--inline">
             <th>Lp</th>
+            <th>Email</th>
             <th>Nazwa</th>
-            <th>Opis</th>
             <th>Zarzadzaj</th>
         </tr>
-        <c:forEach items="${allInstitutions}" var="institution" varStatus="stat">
+        <c:forEach items="${allUsers}" var="user" varStatus="stat">
             <tr class="form-group text-area">
                 <td>${stat.count}</td>
-                <td>${institution.name}</td>
-                <td>${institution.description}</td>
+                <td>${user.email}</td>
+                <td>${user.username}</td>
                 <td>
-                    <c:url value="/admin/institutions/delete" var="deleteURL">
-                        <c:param name="id" value="${institution.id}"/>
+                    <c:url value="/admin/users/delete" var="deleteURL">
+                        <c:param name="id" value="${user.id}"/>
                     </c:url>
-                    <c:url value="/admin/institutions/update" var="updateURL">
-                        <c:param name="id" value="${institution.id}"/>
+                    <c:url value="/admin/users/update" var="updateURL">
+                        <c:param name="id" value="${user.id}"/>
                     </c:url>
                     <a href="${deleteURL}" class="btn btn--without-border">Usuń</a>
                     <a href="${updateURL}" class="btn btn--without-border">Edytuj</a>
@@ -48,9 +47,6 @@
             </tr>
         </c:forEach>
     </table>
-
-    <a href="/admin/institution/add" class="btn btn--without-border">
-        Dodaj Instytucje</a></br></br>
 </div></br></br></br></br></br>
 
 <jsp:include page="../footer.jsp"/>

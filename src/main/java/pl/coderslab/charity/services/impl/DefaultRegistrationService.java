@@ -59,16 +59,16 @@ public class DefaultRegistrationService implements RegistrationService {
     @Override
     public List<RegistrationDTO> findAllAdmins() {
         ModelMapper adminMapper = new ModelMapper();
-        return userRepository.findAllAdmins().stream()
+        return userRepository.allAdmins().stream()
                 .map(a -> adminMapper.map(a, RegistrationDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void deleteAdmin(RegistrationDTO registrationDTO, Long id) {
-        User user = userRepository.findById(id).get();
-        if (user != null) {
-            userRepository.delete(user);
+        User admin = userRepository.findById(id).get();
+        if (admin != null) {
+            userRepository.delete(admin);
         }
 
     }
@@ -79,5 +79,24 @@ public class DefaultRegistrationService implements RegistrationService {
         ModelMapper mapper = new ModelMapper();
         return mapper.map(adminToEdit, RegistrationDTO.class);
     }
+
+                    //users//
+    @Override
+    public List<RegistrationDTO> findAllUsers() {
+        ModelMapper mapper = new ModelMapper();
+        return userRepository.allUsers().stream()
+                .map(u->mapper.map(u,RegistrationDTO.class))
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public void deleteUser(RegistrationDTO registrationDTO, Long id) {
+        User user = userRepository.findById(id).get();
+        userRepository.delete(user);
+
+    }
+
+
 
 }
