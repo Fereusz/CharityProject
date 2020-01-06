@@ -77,13 +77,13 @@ public class AdminController {
         return "redirect:/admin/admins";
     }
 
-    @GetMapping("admins/update")
+    @GetMapping("admins/edit")
     public String prepareUpdateAdminAccount(Model model, Long id) {
         model.addAttribute("adminUpdate", registrationService.updateAdmin(id));
         return "/admin/admin-update";
     }
 
-    @PostMapping("admins/update")
+    @PostMapping("admins/edit")
     public String processUpdateAdminAccount(@ModelAttribute("adminUpdate") @Valid RegistrationDTO registrationDTO,
                                             BindingResult result) {
         if (result.hasErrors()) {
@@ -127,14 +127,14 @@ public class AdminController {
         return "redirect:/admin/institutions";
     }
 
-    @GetMapping("/institutions/update")
+    @GetMapping("/institutions/edit")
     public String prepareUpdateInstitution(Model model, Long id) {
         model.addAttribute("updateInstitution", institutionService.prepareUpdate(id));
         return "admin/institution-update";
 
     }
 
-    @PostMapping("/institutions/update")
+    @PostMapping("/institutions/edit")
     public String processUpdateInstitution (@ModelAttribute ("updateInstitution") @Valid InstitutionDTO
                                                     institutionDTO, BindingResult result) {
         if (result.hasErrors()) {
@@ -155,6 +155,22 @@ public class AdminController {
     @GetMapping("/users/delete")
     public String deleteUser (RegistrationDTO registrationDTO, Long id) {
         registrationService.deleteUser(registrationDTO,id);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/edit")
+    public String prepareUpdateUserAccount (Model model, Long id) {
+        model.addAttribute("userUpdate",registrationService.updateUser(id));
+        return "users/user-update";
+    }
+
+    @PostMapping("/users/edit")
+    public String processUpdateUserAccount (@ModelAttribute("userUpdate") @Valid RegistrationDTO registrationDTO,
+                                            BindingResult result){
+        if(result.hasErrors()){
+            return "users/user-update";
+        }
+        registrationService.register(registrationDTO);
         return "redirect:/admin/users";
     }
 }
