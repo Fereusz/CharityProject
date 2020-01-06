@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.domain.entities.User;
+import pl.coderslab.charity.domain.repositories.DonationRepository;
+import pl.coderslab.charity.domain.repositories.InstitutionRepository;
 import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.InstitutionDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
@@ -33,7 +35,10 @@ public class AdminController {
         this.userRepository = userRepository;
         this.institutionService = institutionService;
         this.donationService = donationService;
+
     }
+
+                             // ADMIN MANAGEMENT//
 
     @GetMapping
     public String getAdminPage(Principal principal, Model model) {
@@ -91,18 +96,20 @@ public class AdminController {
         return "redirect:/admin/admins";
     }
 
-    // INSTITUTIONS //
+                                 // INSTITUTIONS MANAGEMENT //
+
 
     @GetMapping("/institutions")
-    public String showAllInstitutions(Model model) {
+    public String getAllInstitutionsPage(Model model) {
         model.addAttribute("allInstitutions", institutionService.findAllInstitutions());
-        return "/admin/institution-all";
+        return "admin/institution-all";
     }
 
-    @GetMapping("/institutions/delete")
+
+   @GetMapping("/institutions/delete")
     public String deleteInstitution(InstitutionDTO institutionDTO, Long id) {
-        institutionService.deleteInstitution(institutionDTO, id);
-        return "redirect: admin/institutions";
+        institutionService.deleteInstitution(institutionDTO,id);
+        return "redirect:/admin/institutions";
 
     }
 
@@ -119,7 +126,7 @@ public class AdminController {
         if (result.hasErrors()) {
             return "admin/institution-add";
         }
-        institutionService.saveInstitution(institutionDTO);
+        institutionService.addInstitution(institutionDTO);
         return "redirect:/admin/institutions";
     }
 
@@ -136,7 +143,7 @@ public class AdminController {
         if (result.hasErrors()) {
             return "admin/institution-update";
         }
-        institutionService.saveInstitution(institutionDTO);
+        institutionService.addInstitution(institutionDTO);
         return "redirect:/admin/institutions";
     }
 }

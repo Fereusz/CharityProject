@@ -37,10 +37,10 @@
                 <td>${institution.description}</td>
                 <td>
                     <c:url value="/admin/institutions/delete" var="deleteURL">
-                        <c:param name="id" value="${admin.id}"/>
+                        <c:param name="id" value="${institution.id}"/>
                     </c:url>
                     <c:url value="/admin/institutions/update" var="updateURL">
-                        <c:param name="id" value="${admin.id}"/>
+                        <c:param name="id" value="${institution.id}"/>
                     </c:url>
                     <a href="${deleteURL}" class="btn btn--without-border">Usuń</a>
                     <a href="${updateURL}" class="btn btn--without-border">Edytuj</a>

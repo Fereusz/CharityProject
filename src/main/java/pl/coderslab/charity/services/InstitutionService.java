@@ -9,7 +9,7 @@ public interface InstitutionService {
 
     List<InstitutionDTO> findAllInstitutions();
     void deleteInstitution (InstitutionDTO institutionDTO, Long id);
-    void saveInstitution (InstitutionDTO institutionDTO);
+    void addInstitution (InstitutionDTO institutionDTO);
     InstitutionDTO  prepareUpdate(Long id);
 }
 
