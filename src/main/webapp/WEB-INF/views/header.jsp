@@ -19,13 +19,21 @@
             </sec:authorize></br</br>
 
             <sec:authorize access="hasRole('ADMIN')">
+                <li> Welcome <sec:authentication property="principal.username"/></li>
                 <li><a href="/admin/admins" class="btn btn--without-border">Administratorzy</a></li>
                 <li><a href="/admin/users" class="btn btn--without-border">Użytkownicy</a></li>
                 <li><a href="/admin/institutions" class="btn btn--without-border">Instytucje</a></li>
             </sec:authorize></br></br>
 
-            <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="hasRole('USER')">
                 <li> Welcome <sec:authentication property="principal.username"/></li>
+                <li><a href="/user/edit" class="btn btn--without-border">Edytuj Dane</a></li>
+                <li><a href="/user/password" class="btn btn--without-border">Zmień hasło</a></li>
+
+            </sec:authorize>
+
+            <sec:authorize access="isAuthenticated()">
+
 
                 <form method="post" action="/logout">
                         <button class="btn btn--small btn--without-border" type="submit">Wyloguj</button>
