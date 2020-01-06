@@ -38,7 +38,7 @@
                     <c:url value="/admin/users/delete" var="deleteURL">
                         <c:param name="id" value="${user.id}"/>
                     </c:url>
-                    <c:url value="/admin/users/update" var="updateURL">
+                    <c:url value="/admin/users/edit" var="updateURL">
                         <c:param name="id" value="${user.id}"/>
                     </c:url>
                     <a href="${deleteURL}" class="btn btn--without-border">Usuń</a>
