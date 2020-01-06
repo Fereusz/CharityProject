@@ -20,5 +20,7 @@ public interface RegistrationService  {
     List<RegistrationDTO> findAllUsers();
     void deleteUser (RegistrationDTO registrationDTO,Long id);
     RegistrationDTO updateUser (Long id);
+    void blockUserById(Long id);
+    void unblockUserById(Long id);
 
 }

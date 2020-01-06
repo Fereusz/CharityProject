@@ -19,4 +19,5 @@ public class RegistrationDTO {
     @NotBlank @Size(min = 4, max = 12)
     private String rePassword;
     private Long id;
+    private Boolean active;
 }

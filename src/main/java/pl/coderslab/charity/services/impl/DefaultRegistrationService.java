@@ -80,12 +80,12 @@ public class DefaultRegistrationService implements RegistrationService {
         return mapper.map(adminToEdit, RegistrationDTO.class);
     }
 
-                    //USERS//
+    //USERS//
     @Override
     public List<RegistrationDTO> findAllUsers() {
         ModelMapper mapper = new ModelMapper();
         return userRepository.allUsers().stream()
-                .map(u->mapper.map(u,RegistrationDTO.class))
+                .map(u -> mapper.map(u, RegistrationDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -101,6 +101,17 @@ public class DefaultRegistrationService implements RegistrationService {
         User userToEdit = userRepository.findById(id).get();
         return mapper.map(userToEdit, RegistrationDTO.class);
 
+    }
+
+    @Override
+    public void blockUserById(Long id) {
+        userRepository.blockById(id);
+
+    }
+
+    @Override
+    public void unblockUserById(Long id) {
+        userRepository.unblockById(id);
     }
 
 

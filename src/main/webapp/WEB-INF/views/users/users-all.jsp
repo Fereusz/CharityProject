@@ -27,6 +27,7 @@
             <th>Lp</th>
             <th>Email</th>
             <th>Nazwa</th>
+            <th>Czy aktywny?</th>
             <th>Zarzadzaj</th>
         </tr>
         <c:forEach items="${allUsers}" var="user" varStatus="stat">
@@ -34,6 +35,7 @@
                 <td>${stat.count}</td>
                 <td>${user.email}</td>
                 <td>${user.username}</td>
+                <td>${user.active}</td>
                 <td>
                     <c:url value="/admin/users/delete" var="deleteURL">
                         <c:param name="id" value="${user.id}"/>
@@ -41,8 +43,16 @@
                     <c:url value="/admin/users/edit" var="updateURL">
                         <c:param name="id" value="${user.id}"/>
                     </c:url>
+                    <c:url value="/admin/users/block" var="blockURL">
+                        <c:param name="id" value="${user.id}"/>
+                    </c:url>
+                    <c:url value="/admin/users/unblock" var="unblockURL">
+                        <c:param name="id" value="${user.id}"/>
+                    </c:url>
                     <a href="${deleteURL}" class="btn btn--without-border">Usuń</a>
                     <a href="${updateURL}" class="btn btn--without-border">Edytuj</a>
+                    <a href="${blockURL}" class="btn btn--without-border">Zablokuj</a>
+                    <a href="${unblockURL}" class="btn btn--without-border">Odblokuj</a>
                 </td>
             </tr>
         </c:forEach>

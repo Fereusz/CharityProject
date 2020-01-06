@@ -173,6 +173,18 @@ public class AdminController {
         registrationService.register(registrationDTO);
         return "redirect:/admin/users";
     }
+
+    @GetMapping("/users/block")
+    public String blockUser (Long id) {
+        registrationService.blockUserById(id);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/unblock")
+    public String unblockUser (Long id) {
+        registrationService.unblockUserById(id);
+        return "redirect:/admin/users";
+    }
 }
 
 
