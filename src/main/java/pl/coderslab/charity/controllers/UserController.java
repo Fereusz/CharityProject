@@ -7,10 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.dtos.LoggedUserEditDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
+import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.services.RegistrationService;
 import pl.coderslab.charity.services.UserService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -29,19 +33,18 @@ public class UserController {
 
     @GetMapping("/edit")
     public String prepareUpdateUser (Model model, Principal principal){
-        model.addAttribute("editUser",userService.updateUser(principal));
+        model.addAttribute("editUser",userService.updateLoggedUser(principal));
         return "users/user-edit";
     }
 
-    // ??? /// Jak zapisać zmiany ??
     @PostMapping("/edit")
-    public String processUpdateUser (@ModelAttribute("editUser") @Valid RegistrationDTO registrationDTO,
-                                     BindingResult result) {
+    public String processUpdateUser (@ModelAttribute("editUser") @Valid LoggedUserEditDTO loggedUserEditDTO,
+                                     BindingResult result, Principal principal) {
         if(result.hasErrors()){
             return "users/user-edit";
         }
-        registrationService.register(registrationDTO);
-        return "/user";
+        userService.processUpdateLoggedUser(loggedUserEditDTO, principal);
+        return "redirect:/";
     }
 
 }

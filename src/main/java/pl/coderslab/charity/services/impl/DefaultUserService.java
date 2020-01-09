@@ -8,9 +8,13 @@ import pl.coderslab.charity.domain.entities.Role;
 import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.domain.repositories.RoleRepository;
 import pl.coderslab.charity.domain.repositories.UserRepository;
+import pl.coderslab.charity.dtos.LoggedUserEditDTO;
+import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.services.UserService;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,12 +35,23 @@ public class DefaultUserService implements UserService {
 
 
     @Override
-    public UserDTO updateUser(Principal principal) {
+    public UserDTO updateLoggedUser (Principal principal) {
         ModelMapper mapper = new ModelMapper();
         User userToEdit = userRepository.findByUsername(principal.getName());
         return mapper.map(userToEdit, UserDTO.class);
 
     }
+
+    @Override
+    public void processUpdateLoggedUser(LoggedUserEditDTO loggedUserEditDTO, Principal principal) {
+        User userToEdit = userRepository.findByUsername(principal.getName());
+        userToEdit.setUsername(loggedUserEditDTO.getUsername());
+        userToEdit.setEmail(loggedUserEditDTO.getEmail());
+        userRepository.save(userToEdit);
+
+
+    }
+
 
     @Override
     public void register(UserDTO userDTO) {
@@ -73,6 +88,7 @@ public class DefaultUserService implements UserService {
         return mapper.map(userToEdit, UserDTO.class);
 
     }
+
 
     @Override
     public void blockUserById(Long id) {
