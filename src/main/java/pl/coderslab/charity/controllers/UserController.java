@@ -13,6 +13,7 @@ import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.services.RegistrationService;
 import pl.coderslab.charity.services.UserService;
 
+import javax.naming.ldap.PagedResultsControl;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -45,6 +46,21 @@ public class UserController {
         }
         userService.processUpdateLoggedUser(loggedUserEditDTO, principal);
         return "redirect:/";
+    }
+    @GetMapping("/password")
+    public String prepareUpdatePassword(Model model, Principal principal) {
+        model.addAttribute("passwordChange",userService.updatePasswordForLoggedUser(principal));
+        return "users/password-change";
+    }
+
+    @PostMapping("/password")
+    public String processUpdatePassword (@Valid UserDTO userDTO, Principal principal, BindingResult result) {
+        if (result.hasErrors()){
+            return "users/password-change";
+        }
+        userService.processUpdatePasswordForLoggedUser(userDTO,principal);
+        return "redirect:/";
+
     }
 
 }

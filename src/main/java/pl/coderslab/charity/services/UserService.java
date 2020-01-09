@@ -11,16 +11,17 @@ import java.util.List;
 
 public interface UserService {
 
+                    //logged user
     UserDTO updateLoggedUser(Principal principal);
     void processUpdateLoggedUser(LoggedUserEditDTO loggedUserEditDTO, Principal principal);
+    UserDTO updatePasswordForLoggedUser(Principal principal);
+    void processUpdatePasswordForLoggedUser(UserDTO userDTO,Principal principal);
 
+                    //Admnin Tools
     void register (UserDTO userDTO);
-
     List<UserDTO> findAllUsers();
-
     void deleteUser (UserDTO userDTO,Long id);
     UserDTO updateUser (Long id);
-
     void blockUserById(Long id);
     void unblockUserById(Long id);
 

@@ -35,7 +35,7 @@ public class DefaultUserService implements UserService {
 
 
     @Override
-    public UserDTO updateLoggedUser (Principal principal) {
+    public UserDTO updateLoggedUser(Principal principal) {
         ModelMapper mapper = new ModelMapper();
         User userToEdit = userRepository.findByUsername(principal.getName());
         return mapper.map(userToEdit, UserDTO.class);
@@ -49,6 +49,20 @@ public class DefaultUserService implements UserService {
         userToEdit.setEmail(loggedUserEditDTO.getEmail());
         userRepository.save(userToEdit);
 
+    }
+
+    @Override
+    public UserDTO updatePasswordForLoggedUser(Principal principal) {
+        ModelMapper mapper = new ModelMapper();
+        User user = userRepository.findByUsername(principal.getName());
+        return mapper.map(user, UserDTO.class);
+    }
+
+    @Override
+    public void processUpdatePasswordForLoggedUser(UserDTO userDTO, Principal principal) {
+        User user = userRepository.findByUsername(principal.getName());
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+        user.setPassword(encodedPassword);
 
     }
 
@@ -63,7 +77,6 @@ public class DefaultUserService implements UserService {
         Role roleUser = roleRepository.getByName("ROLE_USER");
         user.getRoles().add(roleUser);
         userRepository.save(user);
-
 
     }
 
