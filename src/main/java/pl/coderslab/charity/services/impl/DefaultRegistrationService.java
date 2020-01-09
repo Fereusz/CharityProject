@@ -80,39 +80,7 @@ public class DefaultRegistrationService implements RegistrationService {
         return mapper.map(adminToEdit, RegistrationDTO.class);
     }
 
-    //USERS//
-    @Override
-    public List<RegistrationDTO> findAllUsers() {
-        ModelMapper mapper = new ModelMapper();
-        return userRepository.allUsers().stream()
-                .map(u -> mapper.map(u, RegistrationDTO.class))
-                .collect(Collectors.toList());
-    }
 
-    @Override
-    public void deleteUser(RegistrationDTO registrationDTO, Long id) {
-        User user = userRepository.findById(id).get();
-        userRepository.delete(user);
-    }
-
-    @Override
-    public RegistrationDTO updateUser(Long id) {
-        ModelMapper mapper = new ModelMapper();
-        User userToEdit = userRepository.findById(id).get();
-        return mapper.map(userToEdit, RegistrationDTO.class);
-
-    }
-
-    @Override
-    public void blockUserById(Long id) {
-        userRepository.blockById(id);
-
-    }
-
-    @Override
-    public void unblockUserById(Long id) {
-        userRepository.unblockById(id);
-    }
 
 
 }

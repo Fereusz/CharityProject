@@ -11,9 +11,12 @@ import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.InstitutionDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
+import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
 import pl.coderslab.charity.services.RegistrationService;
+import pl.coderslab.charity.services.UserService;
+
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -25,14 +28,14 @@ public class AdminController {
     private final UserRepository userRepository;
     private final InstitutionService institutionService;
     private final DonationService donationService;
+    private final UserService userService;
 
-
-    public AdminController(RegistrationService registrationService, UserRepository userRepository, InstitutionService institutionService, DonationService donationService) {
+    public AdminController(RegistrationService registrationService, UserRepository userRepository, InstitutionService institutionService, DonationService donationService, UserService userService) {
         this.registrationService = registrationService;
         this.userRepository = userRepository;
         this.institutionService = institutionService;
         this.donationService = donationService;
-
+        this.userService = userService;
     }
 
                              // ADMIN MANAGEMENT//
@@ -148,41 +151,41 @@ public class AdminController {
 
     @GetMapping("/users")
     public String showAllUsers(Model model) {
-        model.addAttribute("allUsers", registrationService.findAllUsers());
+        model.addAttribute("allUsers",userService.findAllUsers());
         return "users/users-all";
     }
 
     @GetMapping("/users/delete")
-    public String deleteUser (RegistrationDTO registrationDTO, Long id) {
-        registrationService.deleteUser(registrationDTO,id);
+    public String deleteUser (UserDTO userDTO, Long id) {
+        userService.deleteUser(userDTO,id);
         return "redirect:/admin/users";
     }
 
     @GetMapping("/users/edit")
     public String prepareUpdateUserAccount (Model model, Long id) {
-        model.addAttribute("userUpdate",registrationService.updateUser(id));
+        model.addAttribute("userUpdate",userService.updateUser(id));
         return "users/user-update";
     }
 
     @PostMapping("/users/edit")
-    public String processUpdateUserAccount (@ModelAttribute("userUpdate") @Valid RegistrationDTO registrationDTO,
+    public String processUpdateUserAccount (@ModelAttribute("userUpdate") @Valid UserDTO userDTO,
                                             BindingResult result){
         if(result.hasErrors()){
             return "users/user-update";
         }
-        registrationService.register(registrationDTO);
+        userService.register(userDTO);
         return "redirect:/admin/users";
     }
 
     @GetMapping("/users/block")
     public String blockUser (Long id) {
-        registrationService.blockUserById(id);
+        userService.blockUserById(id);
         return "redirect:/admin/users";
     }
 
     @GetMapping("/users/unblock")
     public String unblockUser (Long id) {
-        registrationService.unblockUserById(id);
+        userService.unblockUserById(id);
         return "redirect:/admin/users";
     }
 }

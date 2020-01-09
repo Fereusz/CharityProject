@@ -7,19 +7,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-public class RegistrationDTO {
+public class UserDTO {
 
-    // nowy DTO dla usera, do edycji
-
+    private Long id;
     @NotBlank
-    @Size(min = 3, max = 12)
     private String username;
-    @NotBlank @Email
+    @Email @NotBlank
     private String email;
-    @NotBlank @Size(min = 4, max = 12)
+    @Size(min = 4, max = 12) @NotBlank
     private String password;
     @NotBlank @Size(min = 4, max = 12)
     private String rePassword;
-    private Long id;
     private Boolean active;
 }

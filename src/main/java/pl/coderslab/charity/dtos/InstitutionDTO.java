@@ -12,6 +12,10 @@ public class InstitutionDTO {
 
     private Long id;
     @NotBlank
+    // unikalne nazwy
+    // DTO do zmiany --> dla edycji i osobne DTO z tabelkami
+    // przy edycji danych
+
     private String name;
     @NotBlank
     private String description;
