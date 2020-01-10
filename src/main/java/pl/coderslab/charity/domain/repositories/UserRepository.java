@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
+    User findUserByUsername(String username);
 
     @Query(value ="select *from users JOIN users_roles ON users.id = users_roles.user_id WHERE users_roles.roles_id =2", nativeQuery = true)
     List<User> allAdmins();

@@ -4,10 +4,12 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.domain.entities.Category;
 import pl.coderslab.charity.domain.entities.Institution;
+import pl.coderslab.charity.domain.entities.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 public class DonationDTO {
 
 
+    private Long id;
     private Integer quantity;
     @NotBlank
     private String street;
@@ -29,7 +32,11 @@ public class DonationDTO {
     private LocalTime pickUpTime;
     @Size(max = 200)
     private String pickUpComment;
-    private List<Category> categories = new ArrayList<>(); // tutaj zrobic liste <CategoryDTO>
-    private Institution institution; // tutaj zrobic obiekt insitutionDTO
+    private List<Category> categories = new ArrayList<>();
+    private Institution institution;
+    private Boolean status = Boolean.FALSE;
+    private User user;
+    private LocalDateTime createDate = LocalDateTime.now();
+    private Long userId;
 
 }

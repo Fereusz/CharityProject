@@ -37,14 +37,14 @@ public class DefaultUserService implements UserService {
     @Override
     public UserDTO updateLoggedUser(Principal principal) {
         ModelMapper mapper = new ModelMapper();
-        User userToEdit = userRepository.findByUsername(principal.getName());
+        User userToEdit = userRepository.findUserByUsername(principal.getName());
         return mapper.map(userToEdit, UserDTO.class);
 
     }
 
     @Override
     public void processUpdateLoggedUser(LoggedUserEditDTO loggedUserEditDTO, Principal principal) {
-        User userToEdit = userRepository.findByUsername(principal.getName());
+        User userToEdit = userRepository.findUserByUsername(principal.getName());
         userToEdit.setUsername(loggedUserEditDTO.getUsername());
         userToEdit.setEmail(loggedUserEditDTO.getEmail());
         userRepository.save(userToEdit);
@@ -54,13 +54,13 @@ public class DefaultUserService implements UserService {
     @Override
     public UserDTO updatePasswordForLoggedUser(Principal principal) {
         ModelMapper mapper = new ModelMapper();
-        User user = userRepository.findByUsername(principal.getName());
+        User user = userRepository.findUserByUsername(principal.getName());
         return mapper.map(user, UserDTO.class);
     }
 
     @Override
     public void processUpdatePasswordForLoggedUser(UserDTO userDTO, Principal principal) {
-        User user = userRepository.findByUsername(principal.getName());
+        User user = userRepository.findUserByUsername(principal.getName());
         String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
         user.setPassword(encodedPassword);
 
@@ -112,6 +112,11 @@ public class DefaultUserService implements UserService {
     @Override
     public void unblockUserById(Long id) {
         userRepository.unblockById(id);
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
 

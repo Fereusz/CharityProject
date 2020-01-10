@@ -1,5 +1,6 @@
 package pl.coderslab.charity.services;
 
+import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.dtos.LoggedUserEditDTO;
 import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.dtos.UserDTO;
@@ -24,5 +25,7 @@ public interface UserService {
     UserDTO updateUser (Long id);
     void blockUserById(Long id);
     void unblockUserById(Long id);
+
+    User findUserByUsername(String username);
 
 }

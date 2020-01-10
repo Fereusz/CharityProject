@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.dtos.LoggedUserEditDTO;
-import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.dtos.UserDTO;
+import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.RegistrationService;
 import pl.coderslab.charity.services.UserService;
 
-import javax.naming.ldap.PagedResultsControl;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -25,11 +22,13 @@ public class UserController {
 
     private final UserService userService;
     private  final RegistrationService registrationService;
+    private final DonationService donationService;
 
 
-    public UserController(UserService userService, RegistrationService registrationService) {
+    public UserController(UserService userService, RegistrationService registrationService, DonationService donationService) {
         this.userService = userService;
         this.registrationService = registrationService;
+        this.donationService = donationService;
     }
 
     @GetMapping("/edit")
@@ -63,4 +62,11 @@ public class UserController {
 
     }
 
+                //ZARZADZANIE DARAMI//
+
+    @GetMapping("/donations")
+    public String prepareUserDonationsPage (Model model, Principal principal) {
+        model.addAttribute("allDonations", donationService.getAllDonationsForLoggedUser(principal));
+        return "users/donations-all";
+    }
 }

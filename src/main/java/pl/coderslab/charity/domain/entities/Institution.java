@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter @EqualsAndHashCode(of="id")@ToString(exclude = {"donations"})
+@Getter @Setter @EqualsAndHashCode(of="id")//@ToString(exclude = {"donations"})
 
 @Entity
 @Table(name = "institutions")

@@ -10,13 +10,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@ToString(exclude = {"categories", "institution", "user"})
+//@ToString(exclude = {"categories", "institution", "user"})
 
 @Entity
 @Table(name = "donations")
@@ -46,4 +47,6 @@ public class Donation {
     private String pickUpComment;
     @ManyToOne
     private User user;
+    private Boolean status = Boolean.FALSE;
+    private LocalDateTime createDate = LocalDateTime.now();
 }
