@@ -29,6 +29,7 @@
                 <li> Welcome <sec:authentication property="principal.username"/></li>
                 <li><a href="/user/edit" class="btn btn--without-border">Edytuj Dane</a></li>
                 <li><a href="/user/password" class="btn btn--without-border">Zmień hasło</a></li>
+                <li><a href="/user/donations" class="btn btn--small btn--without-border">Zarządzanie darami</a></li>
 
             </sec:authorize>
 
@@ -46,7 +47,9 @@
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>
             <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
+            <sec:authorize access="hasRole('USER')">
             <li><a href="/donation/form" class="btn btn--without-border">Formularz przekazania darów</a></li>
+            </sec:authorize>
             <li><a href="#" class="btn btn--without-border">O nas</a></li>
             <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
             <li><a href="#" class="btn btn--without-border">Kontakt</a></li>

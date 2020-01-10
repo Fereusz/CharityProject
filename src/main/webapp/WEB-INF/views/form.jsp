@@ -45,6 +45,8 @@
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
         <form:form method="post" modelAttribute="donationDTO">
+            <form:hidden path="userId" value="${user.id}"/>
+<%--            <input type="hidden" name="userId" value="${user.id}"/>--%>
 
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
@@ -90,7 +92,7 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" name="institution" value="${institution.name}"/>
+                            <form:radiobutton path="institution" name="institution" value="${institution.id}"/>
                             <span class="checkbox radio"></span>
                             <span class="description">
                   <div class="title">${institution.name}</div>
