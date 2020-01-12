@@ -1,10 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: marcin
-  Date: 19.12.2019
-  Time: 12:08
+  Date: 12.01.2020
+  Time: 13:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page isELIgnored="false" %>
@@ -18,34 +18,31 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="../header.jsp"/>
 
 <section class="form--steps">
     <div class="form--steps-instructions">
         <div class="form--steps-container">
-            <h3>Ważne!</h3>
+            <h3>Edycja przekazanego daru</h3>
             <p data-step="1" class="active">
-                Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
-                wiedzieć komu najlepiej je przekazać.
+                Edytuj przkazany dar
             </p>
             <p data-step="2">
-                Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
-                wiedzieć komu najlepiej je przekazać.
+                Edutuj przekazane rzeczy
             </p>
             <p data-step="3">
-                Wybierz jedną, do
-                której trafi Twoja przesyłka.
+              Wybierz instytucje
             </p>
-            <p data-step="4">Podaj adres oraz termin odbioru rzeczy.</p>
+            <p data-step="4">Podaj nowy adres oraz termin odbioru rzeczy</p>
         </div>
     </div>
 
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form method="post" modelAttribute="donationDTO">
-            <form:hidden path="userId" value="${user.id}"/>
-<%--            <input type="hidden" name="userId" value="${user.id}"/>--%>
+        <form:form method="post" modelAttribute="donationEdit">
+            <form:hidden path="id" />
+            <%--            <input type="hidden" name="userId" value="${user.id}"/>--%>
 
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
@@ -54,7 +51,7 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <input name="category" type="checkbox" value="${category.name}">
-<%--                            <form:checkbox value="${category.id}" path="categories" />--%>
+                                <%--                            <form:checkbox value="${category.id}" path="categories" />--%>
 
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
@@ -219,7 +216,7 @@
     </div>
 </section>
 
-<jsp:include page="footer.jsp"/>
+<jsp:include page="../footer.jsp"/>
 
 
 

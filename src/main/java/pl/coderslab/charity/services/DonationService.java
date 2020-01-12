@@ -14,4 +14,8 @@ public interface DonationService {
     Long sumOfBags ();
 
     List<Donation> getAllDonationsForLoggedUser (Principal principal);
+
+    void deleteDonationForLoggedUser(Long id);
+
+    DonationDTO updateDonationForLoggedUser(Long id);
 }

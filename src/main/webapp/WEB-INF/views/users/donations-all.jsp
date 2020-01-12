@@ -25,6 +25,7 @@
     <table id="tabUser" >
         <tr class="form-group form-group--inline">
             <th>Lp</th>
+            <th>Nazwa instytucji</th>
             <th>Liczba worków</th>
             <th>Miasto</th>
             <th>Data odbioru</th>
@@ -37,6 +38,7 @@
         <c:forEach items="${allDonations}" var="donation" varStatus="stat">
             <tr class="form-group text-area">
                 <td>${stat.count}</td>
+                <td>${donation.institution.name}</td>
                 <td>${donation.quantity}</td>
                 <td>${donation.zipCode} ${donation.city} ${donation.street} </td>
                 <td>${donation.pickUpDate}</td>

@@ -5,10 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.charity.domain.entities.Donation;
+import pl.coderslab.charity.domain.entities.Institution;
 import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.domain.repositories.DonationRepository;
 import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.DonationDTO;
+import pl.coderslab.charity.dtos.InstitutionDTO;
 import pl.coderslab.charity.services.DonationService;
 
 import java.security.Principal;
@@ -36,8 +38,6 @@ public class DefaultDonationService implements DonationService {
 
     }
 
-
-
     @Override
     public Long sumOfDonatedInstitutions() {
         return donationRepository.sumOfInstitutionsDonated();
@@ -52,5 +52,19 @@ public class DefaultDonationService implements DonationService {
     public List<Donation> getAllDonationsForLoggedUser(Principal principal) {
         return donationRepository.findAllByUserOrderByStatusDescPickUpDateAscCreateDateAsc
                 (userRepository.findByUsername(principal.getName()));
+    }
+
+    @Override
+    public void deleteDonationForLoggedUser(Long id) {
+        Donation donation = donationRepository.findById(id).get();
+        donationRepository.delete(donation);
+
+    }
+
+    @Override
+    public DonationDTO updateDonationForLoggedUser(Long id) {
+        ModelMapper mapper = new ModelMapper();
+        Donation donation = donationRepository.findById(id).get();
+        return mapper.map(donation, DonationDTO.class);
     }
 }
