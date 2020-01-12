@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DonationService {
 
-    void makeDonation(DonationDTO donationDTO);
+    void makeDonation(DonationDTO donationDTO); // tutaj popraw tak aby pobieralo id zalogowanego usera
 
     Long sumOfDonatedInstitutions();
     Long sumOfBags ();

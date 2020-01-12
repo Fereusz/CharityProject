@@ -1,9 +1,11 @@
 package pl.coderslab.charity.services.impl;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.charity.domain.entities.Donation;
+import pl.coderslab.charity.domain.entities.User;
 import pl.coderslab.charity.domain.repositories.DonationRepository;
 import pl.coderslab.charity.domain.repositories.UserRepository;
 import pl.coderslab.charity.dtos.DonationDTO;
@@ -27,10 +29,14 @@ public class DefaultDonationService implements DonationService {
     @Override
     public void makeDonation(DonationDTO donationDTO) {
         ModelMapper mapper = new ModelMapper();
+        User user = userRepository.findUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         Donation newDonation = mapper.map(donationDTO, Donation.class);
+        newDonation.setUser(user);
         donationRepository.save(newDonation);
 
     }
+
+
 
     @Override
     public Long sumOfDonatedInstitutions() {

@@ -17,6 +17,6 @@ public class UserDTO {
     @Size(min = 4, max = 12) @NotBlank
     private String password;
     @NotBlank @Size(min = 4, max = 12)
-    private String rePassword;
+//  private String rePassword;
     private Boolean active;
 }
