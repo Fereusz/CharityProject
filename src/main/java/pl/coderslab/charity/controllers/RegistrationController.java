@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.dtos.RegistrationDTO;
+import pl.coderslab.charity.services.EmailService;
 import pl.coderslab.charity.services.RegistrationService;
 
 import javax.validation.Valid;
@@ -17,9 +18,11 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     private final RegistrationService registrationService;
+    private final EmailService emailService;
 
-    public RegistrationController(RegistrationService registrationService) {
+    public RegistrationController(RegistrationService registrationService, EmailService emailService) {
         this.registrationService = registrationService;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -36,6 +39,7 @@ public class RegistrationController {
             return "register";
         }
         registrationService.register(registrationDTO);
+        emailService.simpleMessageSent(registrationDTO.getEmail(),"Potwierdzenie rejestracji"," Witamy na pokładzie");
         return "redirect:/";
     }
 }

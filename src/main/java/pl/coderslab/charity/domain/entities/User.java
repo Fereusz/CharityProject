@@ -36,5 +36,13 @@ public class User {
     @ManyToMany
     private Set<Role> roles = new HashSet<>();
 
+//    @Column(name = "enabled")
+//    private boolean enabled;
+
+//    public User() {
+//        super();
+//        this.enabled=false;
+//    }
+
 
 }
